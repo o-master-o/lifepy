@@ -1,28 +1,22 @@
 from rules import *
-
-WORLDS_LIST = ['TestWorld', 'BetterWorld']
+from tools import *
 
 
 class World(object):
 
     def __init__(self, world_settings):
         self.world_settings = world_settings
+        self.age = 0
+        self.world_life_time = int(self.world_settings['world_life_time'])
         print(world_settings)
 
-    @staticmethod
-    def get_world(name, world_settings):
-        return globals()[name](world_settings=world_settings)
+    def get_age(self):
+        log(self.age)
+        return self.age
 
+    def get_world_life_time(self):
+        log(self.age)
+        return self.world_life_time
 
-class TestWorld(World):
-
-    def __init__(self, world_settings):
-        super().__init__(world_settings)
-        print('TestWorld')
-
-
-class BetterWorld(World):
-
-    def __init__(self, world_settings):
-        super().__init__(world_settings)
-        print('TestWorld')
+    def update(self):
+        self.age = self.age + 1
