@@ -16,13 +16,13 @@ class World(object):
         return self.age
 
     def get_life_speed(self):
-        log(self.life_speed)
+        log('life_speed: ', self.life_speed)
         return self.life_speed
 
     def get_world_life_time(self):
-        log(self.world_life_time)
+        log('world_life_time: ', self.world_life_time)
         return self.world_life_time
 
     def update_world(self):
-        log(self.age)
+        log('world_age: ', self.age)
         self.age = self.age + 1
