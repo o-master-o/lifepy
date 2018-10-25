@@ -4,7 +4,9 @@ update_time =1
 world = TestWorld
 
 [world-config]
-world_life_time = 10
+world_life_time = 3
+world_life_speed = 1
+world_size = 10, 10
 world_population = 3
 pixel_life_time = 5
 

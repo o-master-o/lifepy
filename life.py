@@ -12,15 +12,15 @@ def start_game():
     config_inst = configparser.RawConfigParser()
     config_inst.read(CONFIG_FILE_PATH)
     world_settings = dict(config_inst.items(section='world-config'))
-    print(world_settings)
     world_instance = World(world_settings)
 
     world_life_time = world_instance.get_world_life_time()
     world_age = world_instance.get_age()
+    world_life_speed = world_instance.get_life_speed()
     while world_life_time > world_age:
         world_age = world_instance.get_age()
-        world_instance.update()
-        time.sleep(1)
+        world_instance.update_world()
+        time.sleep(world_life_speed)
 
 
 if __name__ == '__main__':
