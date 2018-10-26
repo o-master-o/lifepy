@@ -1,10 +1,6 @@
 import configparser
 
 
-def log(comment, msg):
-    print(comment, msg)
-
-
 class AdvancedConfigParser(configparser.ConfigParser):
 
     def __init__(self):
@@ -19,5 +15,23 @@ class AdvancedConfigParser(configparser.ConfigParser):
         self.dict_config = di
         return di
 
-    # def filter_dict(self, chosen=[]):
-    #     return {k: v for k, v in self.dict_config.items() if v[0] < 5 and v[1] < 5}
+    def get_filtered_dict(self, filter_list=None):
+        if not self.dict_config:
+            self.get_dict()
+        if filter_list:
+            filter_list = force_to_list(filter_list)
+            di = {}
+            for k in self.dict_config:
+                if k in filter_list:
+                    di.update({k: self.dict_config[k]})
+            return di
+        else:
+            return self.dict_config
+
+
+def log(comment, msg):
+    print(comment, msg)
+
+
+def force_to_list(parameter):
+    return [parameter] if not isinstance(parameter, list) else parameter
