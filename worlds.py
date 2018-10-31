@@ -1,5 +1,6 @@
 from tools import *
-import numpy as np
+# import numpy as np
+import array
 import pprint as pp
 
 
@@ -9,13 +10,14 @@ class World(object):
         self.world_config = world_config
         self.age = 0
         self.life_speed = 1/float(self.world_config['world-config']['world_life_speed'])
-        self.world_size = self.world_config['world-config']['world_size'].split(',')
+        self.world_size = [int(i) for i in self.world_config['world-config']['world_size'].split(',')]
         self.life_time = int(self.world_config['world-config']['world_life_time'])
         self.population = int(self.world_config['world-config']['world_population'])
         print(type(self.world_size))
-        # self.map = self.__map_creator()
+        print(self.world_size)
         self.__map_creator()
 
+    def
 
     def get_age(self):
         return self.age
@@ -31,19 +33,11 @@ class World(object):
     def update_world(self):
         log('world_age: ', self.age)
         self.age = self.age + 1
-        # self.__update_pixels()
-    #
-    # def __update_pixels(self):
-    #     for pixel in self.pixels:
-    #         print('update pixel: ', pixel.name)
 
     # def pixel_randomizer(self):
     def __map_creator(self):
-        # return np.array([[0 for _ in range(int(self.world_size[1]))] for _ in range(int(self.world_size[2]))])
-        return np.array([[0 for _ in range(int(self.world_size[1]))] for _ in range(int(self.world_size[2]))])
-        # my_list = [0 for _ in range(int(self.world_size[1]))]
-        # my_list = [my_list for _ in range(int(self.world_size[2]))]
-        # print(my_list)
+        self.map = [['d' for _ in range(self.world_size[0])] for _ in range(self.world_size[1])]
+        pp.pprint(self.map)
 
 
 

@@ -35,3 +35,10 @@ def log(comment, msg):
 
 def force_to_list(parameter):
     return [parameter] if not isinstance(parameter, list) else parameter
+
+
+# def change_list_elements_type(input_list, type='int'):
+    # fn = getattr(bui, type, None)
+    # if callable(fn):
+    #     fn()
+    # return [type(i) for i in input_list]
