@@ -7,17 +7,52 @@ import pprint as pp
 class World(object):
 
     def __init__(self, world_config):
-        self.world_config = world_config
         self.age = 0
-        self.life_speed = 1/float(self.world_config['world-config']['world_life_speed'])
-        self.world_size = [int(i) for i in self.world_config['world-config']['world_size'].split(',')]
-        self.life_time = int(self.world_config['world-config']['world_life_time'])
-        self.population = int(self.world_config['world-config']['world_population'])
-        print(type(self.world_size))
-        print(self.world_size)
-        self.__map_creator()
+        self.__set_world_attributes_(world_config)
+        self.__create_map()
 
-    def
+    def __set_world_attributes_(self, dict_config):
+        self.__dict__.update(self.__get_typed_attributes(dict_config))
+        print(self.__dict__)
+
+    def __get_typed_attributes(self, dict_config):
+        raw_config = self.__get_raw_attributes(dict_config)
+        return {k: self.__auto_type(v) for k, v in raw_config.items()}
+
+    def __get_raw_attributes(self, dict_config):
+        raw_config = {}
+        for _, v in dict_config.items():
+            raw_config.update(v)
+        print(raw_config)
+        return raw_config
+
+    def __auto_type(self, untyped_str):
+        for fn in (self.__boolify, self.__listify, int, float):
+            try:
+                typed_str = fn(untyped_str)
+                return typed_str
+            except ValueError:
+                pass
+        return untyped_str
+
+    def __boolify(self, untyped):
+        if untyped == 'True':
+            return True
+        if untyped == 'False':
+            return False
+        raise ValueError("It is not bool Type")
+
+    def __listify(self, untyped):
+        if untyped[0] == '[' and untyped[-1] == ']':
+            listified = untyped[1: -1].split(',')
+            for i, item in enumerate(listified):
+                listified[i] = self.__auto_type(item)
+            return listified
+        raise ValueError("It is not list")
+
+    def __create_map(self):
+        self.map = [[0 for _ in range(self.world_size[0])] for _ in range(self.world_size[1])]
+        pp.pprint(self.map)
 
     def get_age(self):
         return self.age
@@ -35,30 +70,3 @@ class World(object):
         self.age = self.age + 1
 
     # def pixel_randomizer(self):
-    def __map_creator(self):
-        self.map = [['d' for _ in range(self.world_size[0])] for _ in range(self.world_size[1])]
-        pp.pprint(self.map)
-
-
-
-#
-# class Pixel(object):
-#
-#     def __init__(self, name):
-#         self.name = name
-#         self.sex = 'm'
-#         self.age = 0
-        # self.life_time = pixel_settings['life_time']
-    #     self.reproduction_period = pixel_settings['reproduction_period']
-    #
-    # def coitus(self):
-    #     pass
-    #
-    # def walk(self):
-    #     pass
-    #
-    # def __del__(self):
-    #     print(self.name, 'died')
-    #
-    # def die(self):
-    #     self.__init__()
