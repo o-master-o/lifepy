@@ -15,15 +15,15 @@ def start_game():
     config_inst = AdvancedConfigParser()
     config_inst.read([DEFAULTS_CONFIG_FILE_PATH, CONFIG_FILE_PATH])
     world_config = config_inst.get_filtered_dict(['world-config', 'pixel-config'])
-    # pp.pprint(world_config)
 
     world_instance = World(world_config)
+    pp.pprint(world_instance.__dict__)
 
-    world_life_time = world_instance.get_world_life_time()
-    world_life_speed = world_instance.get_life_speed()
-    while world_life_time > world_instance.get_age():
-        world_instance.update_world()
-        time.sleep(1/world_life_speed)
+    # world_life_time = world_instance.get_world_life_time()
+    # world_life_speed = world_instance.get_life_speed()
+    # while world_life_time > world_instance.get_age():
+    #     world_instance.update_world()
+    #     time.sleep(1/world_life_speed)
 
 
 if __name__ == '__main__':
