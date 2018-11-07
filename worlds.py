@@ -4,6 +4,7 @@ import random
 
 class World(object):
 
+
     def __init__(self, world_config):
         self.age = 0
         self.__set_attributes(world_config)
@@ -23,15 +24,26 @@ class World(object):
         self.__pixel_randomizer()
 
     def __pixel_randomizer(self):
+        print('++++++++++++++++')
+        pp.pprint(self.map)
+        rand_points = self.__generate_uniq_pixels(self.world_size[0], self.world_size[1], self.world_population)
+        print('************')
+        dupa = map(self.__invade_pixel, rand_points)
+        pp.pprint(dupa)
+    #     # for _ in range(self.world_population):
+    #     #     h = random.randrange(self.world_size[0]-1)
+    #     #     v = random.randrange(self.world_size[1]-1)
+    #     #     print(h, v)
+    #     #     self.map[h][v] = 1
         print('--------------------')
         pp.pprint(self.map)
-        for _ in range(self.world_population):
-            h = random.randrange(self.world_size[0]-1)
-            v = random.randrange(self.world_size[1]-1)
-            print(h, v)
-            self.map[h][v] = 1
-        print('--------------------')
-        pp.pprint(self.map)
+
+    def __generate_uniq_pixels(self, w, h, n):
+        return [divmod(i, w) for i in random.sample(range(w * h), n)]
+
+    def __invade_pixel(self, pixel):
+        print(pixel)
+        self.map[pixel[0]][pixel[1]] = 1
 
     def get_age(self):
         return self.age
