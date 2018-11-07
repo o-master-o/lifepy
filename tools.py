@@ -8,15 +8,13 @@ class AdvancedConfigParser(configparser.ConfigParser):
         super().__init__()
         self.dict_config = {}
 
-    def get_filtered_dict(self, filter_list=None, auto_type=True):
+    def filter_dict(self, filter_list=None, auto_type=True):
         if not self.dict_config:
             self.get_dict(auto_type)
         if filter_list:
             filter_list = self.force_to_list(filter_list)
-            filtered_dict = {}
-            for k, v in self.dict_config.items():
-                if k in filter_list:
-                    filtered_dict.update({k: v})
+            filtered_dict = {k: v for k, v in self.dict_config.items() if k in filter_list}
+            self.dict_config.clear()
             self.dict_config.update(filtered_dict)
         return self.dict_config
 
@@ -33,10 +31,7 @@ class AdvancedConfigParser(configparser.ConfigParser):
         return {k: dict(self._defaults, **dict_config[k]) for k in dict_config}
 
     def __dict_config_auto_type(self, data):
-        typed_dict_config = {}
-        for section, sub_dict in data.items():
-            typed_dict_config .update({section: self.__sub_dict_auto_type(sub_dict)})
-        return typed_dict_config
+        return {section: self.__sub_dict_auto_type(sub_dict) for section, sub_dict in data.items()}
 
     def __sub_dict_auto_type(self, dict_config):
         return {k: self.__auto_type(v) for k, v in dict_config.items()}
@@ -72,5 +67,3 @@ class AdvancedConfigParser(configparser.ConfigParser):
 
 def log(comment, msg):
     pp.pprint(comment, msg)
-
-

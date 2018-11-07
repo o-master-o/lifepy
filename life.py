@@ -14,7 +14,7 @@ CONFIG_FILE_PATH = r'{}'.format(os.path.join(os.path.dirname(os.path.abspath(__f
 def start_game():
     config_inst = AdvancedConfigParser()
     config_inst.read([DEFAULTS_CONFIG_FILE_PATH, CONFIG_FILE_PATH])
-    world_config = config_inst.get_filtered_dict(['world-config', 'pixel-config'])
+    world_config = config_inst.filter_dict(['world-config', 'pixel-config'])
 
     world_instance = World(world_config)
     pp.pprint(world_instance.__dict__)
