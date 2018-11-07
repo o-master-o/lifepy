@@ -7,16 +7,15 @@ class AdvancedConfigParser(configparser.ConfigParser):
     def __init__(self):
         super().__init__()
         self.dict_config = {}
+        self.filtered_dict_config = {}
 
     def filter_dict(self, filter_list=None, auto_type=True):
         if not self.dict_config:
             self.get_dict(auto_type)
         if filter_list:
             filter_list = self.force_to_list(filter_list)
-            filtered_dict = {k: v for k, v in self.dict_config.items() if k in filter_list}
-            self.dict_config.clear()
-            self.dict_config.update(filtered_dict)
-        return self.dict_config
+            self.filtered_dict_config.update({k: v for k, v in self.dict_config.items() if k in filter_list})
+        return self.filtered_dict_config
 
     def get_dict(self, auto_type=True):
         clear_dict_config = self.__ordered_dict_to_dict()
