@@ -5,10 +5,11 @@ import random
 class World(object):
 
     def __init__(self, world_config):
-        self.age = 0
         self.__set_attributes(world_config)
+        self.__OCCUPY_METHODS = {'manual': None, 'automatic': self.__pixel_randomizer}
+        self.__age = 0
         self.__create_map()
-        self.__pixel_randomizer()
+        self.__occupy_world()
 
     def __set_attributes(self, dict_config):
         attributes_dict = {}
@@ -19,8 +20,8 @@ class World(object):
     def __create_map(self):
         self.map = [[0 for _ in range(self.world_size[0])] for _ in range(self.world_size[1])]
 
-    def __occupy_world(self, occupy_method):
-        self.__pixel_randomizer()
+    def __occupy_world(self, **kwargs):
+        self.__OCCUPY_METHODS.get(self.occupy_method, self.__OCCUPY_METHODS['automatic'])(**kwargs)
 
     def __pixel_randomizer(self):
         rand_points = self.__generate_uniq_pixels(self.world_size[0], self.world_size[1], self.world_population)
@@ -34,7 +35,7 @@ class World(object):
         self.map[pixel[0]][pixel[1]] = 1
 
     def get_age(self):
-        return self.age
+        return self.__age
 
     def get_life_speed(self):
         log('life_speed: ', self.life_speed)
@@ -45,5 +46,5 @@ class World(object):
         return self.life_time
 
     def update_world(self):
-        log('world_age: ', self.age)
-        self.age = self.age + 1
+        log('world_age: ', self.__age)
+        self.__age = self.__age + 1
