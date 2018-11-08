@@ -6,7 +6,12 @@ class World(object):
 
     def __init__(self, world_config):
         self.__set_attributes(world_config)
-        self.__OCCUPY_METHODS = {'manual': None, 'automatic': self.__pixel_randomizer}
+        self.__OCCUPY_METHODS = {'manual': lambda: exec("print('{}')\n{}".format('--------------------------------------------\\n'
+                                                                                 'Manual occupy method is NOT IMPLEMENTED YET!'
+                                                                                 '\\nautomatic method will be used\\n'
+                                                                                 '--------------------------------------------',
+                                                                                 self.__pixel_randomizer())),
+                                 'automatic': self.__pixel_randomizer}
         self.__age = 0
         self.__create_map()
         self.__occupy_world()
