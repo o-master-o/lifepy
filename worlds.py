@@ -44,7 +44,7 @@ class World(object):
 
     def get_life_speed(self):
         log('life_speed: ', self.life_speed)
-        return self.life_speed
+        return 1/float(self.life_speed)
 
     def get_world_life_time(self):
         log('world_life_time: ', self.life_time)

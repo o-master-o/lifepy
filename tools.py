@@ -65,4 +65,4 @@ class AdvancedConfigParser(configparser.ConfigParser):
 
 
 def log(comment, msg):
-    pp.pprint(comment, msg)
+    print(comment, msg)
