@@ -1,12 +1,13 @@
 from tools import *
 import random
-
+import os
 
 class World(object):
 
     def __init__(self, world_config):
         self.__set_attributes(world_config)
-        self.__OCCUPY_METHODS = {'manual': lambda: exec("print('{}')\n{}".format('--------------------------------------------\\n'
+        self.__OCCUPY_METHODS = {'manual': lambda: exec("print('{}')\n"
+                                                        "{}".format('--------------------------------------------\\n'
                                                                                  'Manual occupy method is NOT IMPLEMENTED YET!'
                                                                                  '\\nautomatic method will be used\\n'
                                                                                  '--------------------------------------------',
@@ -51,5 +52,16 @@ class World(object):
         return self.life_time
 
     def update_world(self):
+        os.system('clear')
         log('world_age: ', self.__age)
         self.__age = self.__age + 1
+        self.__update_map()
+
+    def __update_map(self):
+        temp_map = [[self.__spawn_pixel() for _ in range(self.world_size[0])] for _ in range(self.world_size[1])]
+
+    def __spawn_pixel(self):
+        pass
+
+    def __check_pixel_age(self):
+        pass

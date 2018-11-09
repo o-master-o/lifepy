@@ -1,8 +1,6 @@
 from render import *
 from worlds import *
 from tools import *
-import os
-import pprint as pp
 import time
 # import pygame
 
@@ -21,7 +19,7 @@ def start_game():
 
     world_life_time = world_instance.get_world_life_time()
     world_life_speed = world_instance.get_life_speed()
-    while world_life_time > world_instance.get_age():
+    while world_life_time >= world_instance.get_age():
         world_instance.update_world()
         time.sleep(world_life_speed)
 
