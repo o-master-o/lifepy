@@ -7,7 +7,7 @@
     "life_speed"      : 10,
     "world_size"      : [10, 10],
     "world_population": 5,
-    "occupy_method": "automatic"
+    "occupy_method"   : "automatic"
   },
-  "pixel_config" : null
+  "pixel_config"      : null
 }
