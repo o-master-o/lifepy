@@ -2,32 +2,26 @@ from tools import *
 import random
 import os
 
+
 class World(object):
 
     def __init__(self, world_config):
         self.__set_attributes(world_config)
-        self.__OCCUPY_METHODS = {'manual': lambda: exec("print('{}')\n"
-                                                        "{}".format('--------------------------------------------\\n'
-                                                                                 'Manual occupy method is NOT IMPLEMENTED YET!'
-                                                                                 '\\nautomatic method will be used\\n'
-                                                                                 '--------------------------------------------',
-                                                                                 self.__pixel_randomizer())),
-                                 'automatic': self.__pixel_randomizer}
         self.__age = 0
         self.__create_map()
         self.__occupy_world()
 
     def __set_attributes(self, dict_config):
-        attributes_dict = {}
-        for _, v in dict_config.items():
-            attributes_dict.update(v)
-        self.__dict__.update(attributes_dict)
+        for _, config_section in dict_config.items():
+            for attribute, value in config_section.items():
+                setattr(self, attribute, value)
 
     def __create_map(self):
-        self.map = [[0 for _ in range(self.world_size[0])] for _ in range(self.world_size[1])]
+        self.map = [[0 for _ in range(self.world_size[0])]
+                    for _ in range(self.world_size[1])]
 
     def __occupy_world(self, **kwargs):
-        self.__OCCUPY_METHODS.get(self.occupy_method, self.__OCCUPY_METHODS['automatic'])(**kwargs)
+        self.__pixel_randomizer()
 
     def __pixel_randomizer(self):
         rand_points = self.__generate_uniq_pixels(self.world_size[0], self.world_size[1], self.world_population)
@@ -52,10 +46,10 @@ class World(object):
         return self.life_time
 
     def update_world(self):
+        self.__update_map()
         os.system('clear')
         log('world_age: ', self.__age)
         self.__age = self.__age + 1
-        self.__update_map()
 
     def __update_map(self):
         temp_map = [[self.__spawn_pixel() for _ in range(self.world_size[0])] for _ in range(self.world_size[1])]

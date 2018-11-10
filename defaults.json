@@ -1,6 +1,7 @@
 {
   "game_config"           : {
-    "world": "TestWorld"
+    "world"           : "TestWorld",
+    "rendering_method": "list_renderer"
   },
   "world_config"          : {
     "life_time"       : 1,
