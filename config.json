@@ -1,0 +1,13 @@
+{
+  "game_config"           : {
+    "world": "TestWorld"
+  },
+  "world_config"          : {
+    "life_time"       : 30,
+    "life_speed"      : 10,
+    "world_size"      : [10, 10],
+    "world_population": 5,
+    "occupy_method": "automatic"
+  },
+  "pixel_config" : null
+}
