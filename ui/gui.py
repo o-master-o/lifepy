@@ -6,6 +6,7 @@
 #    Jan 07, 2020 01:16:17 AM CET  platform: Linux
 
 import sys
+from ui import grid_field
 
 try:
     import Tkinter as tk
@@ -56,7 +57,7 @@ class MainWindow(object):
         self.style.map('.', background=[('selected', _comp_color),
                                         ('active', _ana_2_color)])
 
-        self.top.geometry("1083x696+181+78")
+        self.top.geometry("1215x620+181+78")
         self.top.minsize(1, 1)
         self.top.maxsize(1585, 870)
         self.top.resizable(1, 1)
@@ -133,7 +134,7 @@ class MainWindow(object):
             label="About")
 
         self.TFrame2 = ttk.Frame(top)
-        self.TFrame2.place(relx=0.009, rely=0.273, relheight=0.697, relwidth=0.152)
+        self.TFrame2.place(relx=0.009, rely=0.273, relheight=0.6, relwidth=0.152)
         self.TFrame2.configure(relief='groove')
         self.TFrame2.configure(borderwidth="2")
         self.TFrame2.configure(relief="groove")
@@ -146,11 +147,13 @@ class MainWindow(object):
         self.TLabel1.configure(relief="flat")
         self.TLabel1.configure(text='''Draw your world''')
 
-        self.Canvas1 = tk.Canvas(top)
-        self.Canvas1.place(relx=0.166, rely=0.014, relheight=0.95, relwidth=0.813)
+        self.Canvas1 = grid_field.CanvasGrid(top, 60, 100, 10)
+        self.Canvas1.place(relx=0.166, rely=0.01,
+                           relheight=0.99, relwidth=0.9
+                           )
         self.Canvas1.configure(borderwidth="2")
-        self.Canvas1.configure(relief="ridge")
-        self.Canvas1.configure(selectbackground="#c4c4c4")
+        # self.Canvas1.configure(relief="ridge")
+        # self.Canvas1.configure(selectbackground="#c4c4c4")
 
     def show_about(self):
         window = tk.Toplevel(self.top)
