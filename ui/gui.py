@@ -94,7 +94,7 @@ class MainWindow(object):
         self.TLabel2.configure(justify='center')
         self.TLabel2.configure(text='''Control''')
 
-        self.menubar = tk.Menu(top, font="TkMenuFont", bg=_bg_color, fg=_fg_color)
+        self.menubar = tk.Menu(top, font="TkMenuFont", bg=_bg_color, fg=_fg_color, relief="flat")
         self.top.configure(menu=self.menubar)
 
         self.sub_menu = tk.Menu(top, tearoff=0)
@@ -134,7 +134,7 @@ class MainWindow(object):
             label="About")
 
         self.TFrame2 = ttk.Frame(top)
-        self.TFrame2.place(relx=0.009, rely=0.273, relheight=0.6, relwidth=0.152)
+        self.TFrame2.place(relx=0.009, rely=0.273, relheight=0.71, relwidth=0.152)
         self.TFrame2.configure(relief='groove')
         self.TFrame2.configure(borderwidth="2")
         self.TFrame2.configure(relief="groove")
