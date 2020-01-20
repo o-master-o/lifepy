@@ -7,6 +7,7 @@
 
 import sys
 from ui import grid_field
+# from model import world
 
 try:
     import Tkinter as tk
@@ -145,7 +146,7 @@ class MainWindow(object):
         self.TLabel1.configure(foreground="#000000")
         self.TLabel1.configure(font="TkDefaultFont")
         self.TLabel1.configure(relief="flat")
-        self.TLabel1.configure(text='''Draw your world''')
+        self.TLabel1.configure(text="Age")
 
         self.Canvas1 = grid_field.CanvasGrid(top, 60, 100, 10)
         self.Canvas1.place(relx=0.166, rely=0.01,
