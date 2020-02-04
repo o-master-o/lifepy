@@ -41,6 +41,9 @@ def destroy_main_window():
 
 class MainWindow(object):
     def __init__(self, top=None):
+        self.age = 0
+        self.max_age = 0
+        self.speed = 1.0
         self.top = top
         """This class configures and populates the toplevel window.
            top is the toplevel containing window."""
@@ -68,7 +71,7 @@ class MainWindow(object):
         self.TFrame1 = ttk.Frame(top)
         self.TFrame1.place(relx=0.009, rely=0.014, relheight=0.237, relwidth=0.152)
         self.TFrame1.configure(relief='groove')
-        self.TFrame1.configure(borderwidth="2")
+        self.TFrame1.configure(borderwidth="0")
         self.TFrame1.configure(relief="groove")
 
         self.Button1 = tk.Button(self.TFrame1)
@@ -86,14 +89,14 @@ class MainWindow(object):
         self.Button1_2.configure(activebackground="#f9f9f9")
         self.Button1_2.configure(text='''Reset''')
 
-        self.TLabel2 = ttk.Label(self.TFrame1)
-        self.TLabel2.place(relx=0.061, rely=0.061, height=17, width=137)
-        self.TLabel2.configure(background="#d9d9d9")
-        self.TLabel2.configure(foreground="#000000")
-        self.TLabel2.configure(font="TkDefaultFont")
-        self.TLabel2.configure(relief="flat")
-        self.TLabel2.configure(justify='center')
-        self.TLabel2.configure(text='''Control''')
+        self.age_label = ttk.Label(self.TFrame1)
+        self.age_label.place(relx=0.061, rely=0.061, height=17, width=137)
+        self.age_label.configure(background="#d9d9d9")
+        self.age_label.configure(foreground="#000000")
+        self.age_label.configure(font="TkDefaultFont")
+        self.age_label.configure(relief="flat")
+        self.age_label.configure(justify='center')
+        self.age_label.configure(text='''Control''')
 
         self.menubar = tk.Menu(top, font="TkMenuFont", bg=_bg_color, fg=_fg_color, relief="flat")
         self.top.configure(menu=self.menubar)
@@ -137,7 +140,7 @@ class MainWindow(object):
         self.TFrame2 = ttk.Frame(top)
         self.TFrame2.place(relx=0.009, rely=0.273, relheight=0.71, relwidth=0.152)
         self.TFrame2.configure(relief='groove')
-        self.TFrame2.configure(borderwidth="2")
+        self.TFrame2.configure(borderwidth="0")
         self.TFrame2.configure(relief="groove")
 
         self.TLabel1 = ttk.Label(self.TFrame2)
@@ -146,7 +149,15 @@ class MainWindow(object):
         self.TLabel1.configure(foreground="#000000")
         self.TLabel1.configure(font="TkDefaultFont")
         self.TLabel1.configure(relief="flat")
-        self.TLabel1.configure(text="Age")
+        self.TLabel1.configure(text="Speed")
+
+        self.age_label = ttk.Label(self.TFrame2)
+        self.age_label.place(relx=0.061, rely=0.321, height=17, width=147)
+        self.age_label.configure(background="#d9d9d9")
+        self.age_label.configure(foreground="#000000")
+        self.age_label.configure(font="TkDefaultFont")
+        self.age_label.configure(relief="flat")
+        self.age_label.configure(text="Age: {}".format(self.age))
 
         self.Canvas1 = grid_field.CanvasGrid(top, 60, 100, 10)
         self.Canvas1.place(relx=0.166, rely=0.01,
@@ -155,6 +166,18 @@ class MainWindow(object):
         self.Canvas1.configure(borderwidth="2")
         # self.Canvas1.configure(relief="ridge")
         # self.Canvas1.configure(selectbackground="#c4c4c4")
+
+        # self.TEntry1 = ttk.Entry(self.TFrame2)
+        # self.TEntry1.place(relx=0.083, rely=0.133, width=139, height=17)
+        # self.TEntry1.configure(takefocus="")
+        # self.TEntry1.configure(justify='right')
+        # self.TEntry1.configure(cursor="xterm")
+
+        self.TScale1 = ttk.Scale(self.TFrame2, from_=0, to=10, variable=self.age)
+        self.TScale1.place(relx=0.083, rely=0.133, width=139, height=17, bordermode='ignore')
+        self.TScale1.configure(value="1")
+        self.TScale1.configure(length="170")
+        self.TScale1.configure(takefocus="")
 
     def show_about(self):
         window = tk.Toplevel(self.top)
