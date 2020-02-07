@@ -1,4 +1,5 @@
 from tkinter import Tk, Canvas
+import numpy as np
 
 
 class Cell(object):
@@ -13,6 +14,14 @@ class Cell(object):
         self.y = y
         self.size = size
         self._live = False
+
+    @property
+    def live(self):
+        return self._live
+
+    @live.setter
+    def live(self, value):
+        self._live = value
 
     def switch(self):
         """ Switch cell status """
@@ -80,3 +89,6 @@ class CanvasGrid(Canvas):
             cell.switch()
             cell.draw()
             self.switched.append(cell)
+
+    def get_grid(self):
+        return np.array([[y.live for y in x] for x in self.grid])

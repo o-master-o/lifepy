@@ -4,9 +4,9 @@ from model.world import WorldOne
 
 
 class LifeController:
-    def __init__(self):
-        self.view = View()
-        self.world = WorldOne(60, 100)
+    def __init__(self, view, world):
+        self.view = view
+        self.world = world
         self.age = 0
         self.max_age = self.view.get_max_age()
         self.sleep_time = self._set_sleep_time(self.view.get_speed())
@@ -16,10 +16,13 @@ class LifeController:
         return 1.0 / speed
 
     def run_life(self):
+        self.world.grid = self.view.get_grid()
         while self.age <= self.max_age:
-            self.age = self.world.make_life_step()
+            self.view.draw_step(self.world.grid(self.world.make_life_step()))
+
+            self.age += 1
             time.sleep(self.sleep_time)
 
 
 if __name__ == '__main__':
-    app = LifeController()
+    app = LifeController(View(), WorldOne(60, 100))

@@ -18,4 +18,10 @@ class View(object):
     def get_speed(self):
         return self.window.speed
 
+    def draw_step(self, grid):
+        return self.window.canvas.update_canvas(grid)
+
+    def get_grid(self):
+        return self.window.canvas.get_grid()
+
 

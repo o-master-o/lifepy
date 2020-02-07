@@ -78,6 +78,7 @@ class MainWindow(object):
         self.Button1.place(relx=0.061, rely=0.242, height=29, width=139)
         self.Button1.configure(relief="groove")
         self.Button1.configure(text='''Play''')
+        self.Button1.bind("<Button-1>", self.play())
 
         self.Button1_1 = tk.Button(self.TFrame1)
         self.Button1_1.place(relx=0.061, rely=0.485, height=29, width=139)
@@ -159,13 +160,13 @@ class MainWindow(object):
         self.age_label.configure(relief="flat")
         self.age_label.configure(text="Age: {}".format(self.age))
 
-        self.Canvas1 = grid_field.CanvasGrid(top, 60, 100, 10)
-        self.Canvas1.place(relx=0.166, rely=0.01,
+        self.canvas = grid_field.CanvasGrid(top, 60, 100, 10)
+        self.canvas.place(relx=0.166, rely=0.01,
                            relheight=0.99, relwidth=0.9
                            )
-        self.Canvas1.configure(borderwidth="2")
-        # self.Canvas1.configure(relief="ridge")
-        # self.Canvas1.configure(selectbackground="#c4c4c4")
+        self.canvas.configure(borderwidth="2")
+        # self.canvas.configure(relief="ridge")
+        # self.canvas.configure(selectbackground="#c4c4c4")
 
         # self.TEntry1 = ttk.Entry(self.TFrame2)
         # self.TEntry1.place(relx=0.083, rely=0.133, width=139, height=17)
@@ -186,3 +187,9 @@ class MainWindow(object):
         help_label = ttk.Label(window)
         help_label.configure(text='''This is Game of Life''')
         help_label.place(relx=0.061, rely=0.061)
+
+    def update_speed(self):
+        self.TLabel1.config(text="Speed: {}".format(self.TScale1.get()))
+
+    def play(self):
+        pass
